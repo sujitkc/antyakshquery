@@ -18,15 +18,16 @@ public class ClassRoomFrame extends JFrame implements ActionListener {
   JLabel lparticipant = new JLabel("Sujit Kumar Chakrabarti");
   JLabel ltopic = new JLabel("Software Engineering");
   JButton btnnext = new JButton("Next");
+  JButton btnpass = new JButton("Pass");
   public ClassRoomFrame(List<String> participants, List<String> topics) {
     this.participants = participants;
     this.topics = topics;
     this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     this.setTitle("Antyakhs-Query");
     JPanel labelPanel = new JPanel();
-    
 
     this.btnnext.addActionListener(this);
+    this.btnpass.addActionListener(this);
 
     this.lparticipant.setForeground(new Color(255, 0, 0));
     this.lparticipant.setFont(new Font("SansSerif", Font.BOLD, 40));
@@ -37,7 +38,6 @@ public class ClassRoomFrame extends JFrame implements ActionListener {
     this.ltopic.setFont(new Font("SansSerif", Font.BOLD, 40));
     this.ltopic.setAlignmentX(CENTER_ALIGNMENT);
     this.ltopic.setBorder(BorderFactory.createLineBorder(Color.black));
-
 
     labelPanel.setLayout(new BoxLayout(labelPanel, BoxLayout.PAGE_AXIS));
     labelPanel.add(Box.createRigidArea(new Dimension(0,5)));
@@ -51,6 +51,7 @@ public class ClassRoomFrame extends JFrame implements ActionListener {
     buttonPanel.setAlignmentX(Component.CENTER_ALIGNMENT);
     buttonPanel.add(Box.createHorizontalGlue());
     buttonPanel.add(this.btnnext);
+    buttonPanel.add(this.btnpass);
     buttonPanel.add(Box.createHorizontalGlue());
     this.getContentPane().add(buttonPanel, BorderLayout.PAGE_END);
 
@@ -92,6 +93,10 @@ public class ClassRoomFrame extends JFrame implements ActionListener {
       String topic = this.nextTopic();
       this.ltopic.setText(topic);
       this.topics.remove(topic);
+    }
+    else if(this.btnpass.equals(e.getSource())) {
+      String participant = "";
+      this.lparticipant.setText(this.nextParticipant());
     }
   }
 }
