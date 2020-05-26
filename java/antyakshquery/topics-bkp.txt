@@ -1,0 +1,19 @@
+Arithmetic operators
+Relational operators
+Variable
+Arithmetic expressions
+Instruction/command
+Branching instruction
+Pseudo-code
+Algorithm
+Computation
+Parts of a computer -- Processor, memory, input, output
+User interface (UI)
+Graphical user interface (GUI)
+Data types in Python
+Examples of types of objects in real-life?
+Why do we need types in real-life and in programming?
+Looping instructions
+Problem decomposition
+Abstraction
+Patterns
