@@ -14,7 +14,7 @@ import javax.swing.JOptionPane;
 public class Program {
   private static ClassRoomFrame frame;
   public static void main(String[] args) {
-    File pfile = new File("../class.txt");
+    File pfile = new File("../participants.txt");
     File tfile = new File("../topics.txt");
     if(args.length != 0 && args[0].equals("-i")) {
       JFileChooser pchooser = new JFileChooser("..");
@@ -31,7 +31,7 @@ public class Program {
       }
     }
     else {
-      System.out.println("Choosing default file ../class.txt for participants ...");
+      System.out.println("Choosing default file ../participants.txt for participants ...");
       System.out.println("Choosing default file ../topics.txt for topics ...");
     } 
     List<String> participants =  Program.getNamesFromFile(pfile);

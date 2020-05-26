@@ -22,7 +22,6 @@ public class ClassRoomFrame extends JFrame implements ActionListener {
     this.participants = participants;
     this.topics = topics;
     this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-    this.setSize(20 * this.getLongestStringLength(), 250);
     this.setTitle("Antyakhs-Query");
     JPanel labelPanel = new JPanel();
     
@@ -54,11 +53,13 @@ public class ClassRoomFrame extends JFrame implements ActionListener {
     buttonPanel.add(this.btnnext);
     buttonPanel.add(Box.createHorizontalGlue());
     this.getContentPane().add(buttonPanel, BorderLayout.PAGE_END);
+
+    this.setSize(20 * this.getLongestStringLength(), 250);
   }
   
   private int getLongestStringLength() {
     int max = 0;
-    for(String name : this.participants) {
+    for(String name : this.topics) {
       if(name.length() > max) {
         max = name.length();
       }
