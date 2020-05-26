@@ -12,66 +12,85 @@ import java.util.Random;
 import javax.swing.*;
 
 public class ClassRoomFrame extends JFrame implements ActionListener {
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = -8576258744602858081L;
-	List<String> mNames;
-	Random mRandom = new Random();
-	JLabel mNameLabel1 = new JLabel("Sujit Kumar Chakrabarti");
-	JButton mNextButton = new JButton("Next");
-	public ClassRoomFrame(List<String> names) {
-		this.mNames = names;
-		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		this.setSize(20 * this.getLongestStringLength(), 150);
-		this.setTitle("Antyakhs-Query");
-		JPanel labelPanel = new JPanel();
-		
+  List<String> participants;
+  List<String> topics;
+  static Random random = new Random();
+  JLabel lparticipant = new JLabel("Sujit Kumar Chakrabarti");
+  JLabel ltopic = new JLabel("Software Engineering");
+  JButton btnnext = new JButton("Next");
+  public ClassRoomFrame(List<String> participants, List<String> topics) {
+    this.participants = participants;
+    this.topics = topics;
+    this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    this.setSize(20 * this.getLongestStringLength(), 250);
+    this.setTitle("Antyakhs-Query");
+    JPanel labelPanel = new JPanel();
+    
 
-		this.mNextButton.addActionListener(this);
+    this.btnnext.addActionListener(this);
 
-		this.mNameLabel1.setForeground(new Color(255, 0, 0));
-		this.mNameLabel1.setFont(new Font("SansSerif", Font.BOLD, 40));
-		this.mNameLabel1.setAlignmentX(CENTER_ALIGNMENT);
-		this.mNameLabel1.setBorder(BorderFactory.createLineBorder(Color.black));
-		labelPanel.setLayout(new BoxLayout(labelPanel, BoxLayout.PAGE_AXIS));
-		labelPanel.add(Box.createRigidArea(new Dimension(0,5)));
-		labelPanel.add(this.mNameLabel1);
-		labelPanel.setBorder(BorderFactory.createLineBorder(Color.black));
+    this.lparticipant.setForeground(new Color(255, 0, 0));
+    this.lparticipant.setFont(new Font("SansSerif", Font.BOLD, 40));
+    this.lparticipant.setAlignmentX(CENTER_ALIGNMENT);
+    this.lparticipant.setBorder(BorderFactory.createLineBorder(Color.black));
 
-		this.getContentPane().add(BorderLayout.CENTER, labelPanel);
-		JPanel buttonPanel = new JPanel();
-		buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.LINE_AXIS));
-		buttonPanel.setAlignmentX(Component.CENTER_ALIGNMENT);
-		buttonPanel.add(Box.createHorizontalGlue());
-		buttonPanel.add(this.mNextButton);
-		buttonPanel.add(Box.createHorizontalGlue());
-		this.getContentPane().add(buttonPanel, BorderLayout.PAGE_END);
-	}
-	
-	private int getLongestStringLength() {
-		int max = 0;
-		for(String name : this.mNames) {
-			if(name.length() > max) {
-				max = name.length();
-			}
-		}
-		return max;
-	}
-	@Override
-	public void actionPerformed(ActionEvent e) {
-		if(this.mNextButton.equals(e.getSource())) {
-			String name1 = "";
-//			String name2 = "";
-//			while(name1.equals(name2)) {
-			int index = Math.abs(this.mRandom.nextInt() % this.mNames.size());
-			name1 = this.mNames.get(index);
-//				index = Math.abs(this.mRandom.nextInt() % this.mNames.size());
-//				name2 = this.mNames.get(index);
-//			}
-			this.mNameLabel1.setText(name1);
-//			this.mNameLabel2.setText(name2);
-		}
+    this.ltopic.setForeground(Color.BLUE);
+    this.ltopic.setFont(new Font("SansSerif", Font.BOLD, 40));
+    this.ltopic.setAlignmentX(CENTER_ALIGNMENT);
+    this.ltopic.setBorder(BorderFactory.createLineBorder(Color.black));
 
-	}
+
+    labelPanel.setLayout(new BoxLayout(labelPanel, BoxLayout.PAGE_AXIS));
+    labelPanel.add(Box.createRigidArea(new Dimension(0,5)));
+    labelPanel.add(this.lparticipant);
+    labelPanel.add(this.ltopic);
+    labelPanel.setBorder(BorderFactory.createLineBorder(Color.black));
+
+    this.getContentPane().add(BorderLayout.CENTER, labelPanel);
+    JPanel buttonPanel = new JPanel();
+    buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.LINE_AXIS));
+    buttonPanel.setAlignmentX(Component.CENTER_ALIGNMENT);
+    buttonPanel.add(Box.createHorizontalGlue());
+    buttonPanel.add(this.btnnext);
+    buttonPanel.add(Box.createHorizontalGlue());
+    this.getContentPane().add(buttonPanel, BorderLayout.PAGE_END);
+  }
+  
+  private int getLongestStringLength() {
+    int max = 0;
+    for(String name : this.participants) {
+      if(name.length() > max) {
+        max = name.length();
+      }
+    }
+    return max;
+  }
+
+  private static String chooseNext(List<String> list) {
+      int index = Math.abs(ClassRoomFrame.random.nextInt() % list.size());
+      return list.get(index);
+  }
+
+  private String nextParticipant() {
+      return ClassRoomFrame.chooseNext(this.participants);
+  }
+
+  private String nextTopic() {
+      return ClassRoomFrame.chooseNext(this.topics);
+  }
+
+  public void actionPerformed(ActionEvent e) {
+    if(this.btnnext.equals(e.getSource())) {
+      if(this.topics.isEmpty()) {
+        System.out.println("All topics done!");
+        System.exit(0);
+      }
+      String participant = "";
+      this.lparticipant.setText(this.nextParticipant());
+
+      String topic = this.nextTopic();
+      this.ltopic.setText(topic);
+      this.topics.remove(topic);
+    }
+  }
 }
