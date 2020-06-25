@@ -7,7 +7,7 @@ from tkinter import messagebox
 from tkinter import filedialog
 
 class MyGui(Tk.Frame):
-  def __init__(self, master, topicsFile, participantsFile):
+  def __init__(self, master, participantsFile, topicsFile):
     Tk.Frame.__init__(self, master)
     self.grid()
     self.btnnext = Tk.Button(self, text="Next", command=self.next)
@@ -21,6 +21,8 @@ class MyGui(Tk.Frame):
 
     self.topics = MyGui.readFile(topicsFile)
     self.participants = MyGui.readFile(participantsFile)
+    for topic in self.topics:
+      print("\t", topic)
     self.remainingTopics = self.topics[:]
 
   @staticmethod
@@ -65,7 +67,7 @@ if __name__ == "__main__":
   root = Tk.Tk()
   root.title("Antyakshquery")
   root.geometry("300x200")
-  gui = MyGui(root, participantsFile, topicsFile)
+  gui = MyGui(root, participantsFile = participantsFile, topicsFile = topicsFile)
   gui.grid()
   root.mainloop()
  
